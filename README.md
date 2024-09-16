@@ -43,5 +43,5 @@ Here’s a video demonstration of the Customer Churn Prediction project:
 1. Live Website:
    ```bash
 
-   website: https://customerchurndeploy-karanraj-6.onrender.com
+      https://customerchurndeploy-karanraj-6.onrender.com
  
