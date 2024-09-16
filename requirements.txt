@@ -26,7 +26,7 @@ MarkupSafe==2.1.5
 matplotlib==3.9.2
 matplotlib-inline==0.1.7
 nest-asyncio==1.6.0
-numpy==1.24.4
+numpy==2.1.1
 
 packaging==24.1
 pandas==2.2.2
