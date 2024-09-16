@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Churn Prediction</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url('/static/6674358_3393544.jpg') no-repeat center center fixed;
+            background-size: cover;
+        }
+
+        h1 {
+            color: white;
+            text-align: center; 
+            margin-bottom: 30px;
+        }
+
+        form {
+            max-width: 1000px; 
+            margin: auto;
+            padding: 50px;
+            border: 1px solid #ccc;
+            border-radius: 15px;
+            background-color: rgba(255, 255, 255, 0.5); 
+            box-shadow: 0 0 35px rgba(0, 136, 204, 0.9);
+        }
+
+        .form-group {
+            margin-bottom: 15px; 
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            height: 38px; 
+            margin-bottom: 0; 
+            background-color: rgba(255, 255, 255, 0.5);
+        }
+
+        select {
+            height: 38px; 
+        }
+
+        .form-group:last-of-type {
+            text-align: center;
+        }
+
+        button {
+            padding: 10px 15px;
+            background-color: #28a745;
+            color: #008bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0a5a9c;
+        }
+
+        .result {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 15px;
+            text-align: center; 
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            background-color: rgba(255, 255, 255, 0.6);
+        }
+
+        .result h2 {
+            color: #008bff;
+        }
+
+        .error {
+            color: red;
+            font-size: 0.875em;
+            margin-top: 5px;
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .col-md-6 {
+            flex: 1;
+            padding: 10px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group input,
+        .form-group select {
+            margin-top: 5px; 
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Customer Churn Prediction</h1>
+
+    <form method="POST">
+        {{ form.hidden_tag() }}
+
+        <div class="row">
+            <div class="col-md-6">
+                <!-- Column 1 -->
+                <div class="form-group">
+                    <label for="gender">{{ form.gender.label }}</label>
+                    {{ form.gender(id="gender") }}
+                    {% if form.gender.errors %}
+                        <span class="error">{{ form.gender.errors[0] }}</span>
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    <label for="SeniorCitizen">{{ form.SeniorCitizen.label }}</label>
+                    {{ form.SeniorCitizen(id="SeniorCitizen") }}
+                    {% if form.SeniorCitizen.errors %}
+                        <span class="error">{{ form.SeniorCitizen.errors[0] }}</span>
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    <label for="Partner">{{ form.Partner.label }}</label>
+                    {{ form.Partner(id="Partner") }}
+                    {% if form.Partner.errors %}
+                        <span class="error">{{ form.Partner.errors[0] }}</span>
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    <label for="Dependents">{{ form.Dependents.label }}</label>
+                    {{ form.Dependents(id="Dependents") }}
+                    {% if form.Dependents.errors %}
+                        <span class="error">{{ form.Dependents.errors[0] }}</span>
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    <label for="PhoneService">{{ form.PhoneService.label }}</label>
+                    {{ form.PhoneService(id="PhoneService") }}
+                    {% if form.PhoneService.errors %}
+                        <span class="error">{{ form.PhoneService.errors[0] }}</span>
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    <label for="MultipleLines">{{ form.MultipleLines.label }}</label>
+                    {{ form.MultipleLines(id="MultipleLines") }}
+                    {% if form.MultipleLines.errors %}
+                        <span class="error">{{ form.MultipleLines.errors[0] }}</span>
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    <label for="InternetService">{{ form.InternetService.label }}</label>
+                    {{ form.InternetService(id="InternetService") }}
+                    {% if form.InternetService.errors %}
+                        <span class="error">{{ form.InternetService.errors[0] }}</span>
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    <label for="OnlineSecurity">{{ form.OnlineSecurity.label }}</label>
+                    {{ form.OnlineSecurity(id="OnlineSecurity") }}
+                    {% if form.OnlineSecurity.errors %}
+                        <span class="error">{{ form.OnlineSecurity.errors[0] }}</span>
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    <label for="OnlineBackup">{{ form.OnlineBackup.label }}</label>
+                    {{ form.OnlineBackup(id="OnlineBackup") }}
+                    {% if form.OnlineBackup.errors %}
+                        <span class="error">{{ form.OnlineBackup.errors[0] }}</span>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <!-- Column 2 -->
+                <div class="form-group">
+                    <label for="DeviceProtection">{{ form.DeviceProtection.label }}</label>
+                    {{ form.DeviceProtection(id="DeviceProtection") }}
+                    {% if form.DeviceProtection.errors %}
+                        <span class="error">{{ form.DeviceProtection.errors[0] }}</span>
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    <label for="TechSupport">{{ form.TechSupport.label }}</label>
+                    {{ form.TechSupport(id="TechSupport") }}
+                    {% if form.TechSupport.errors %}
+                        <span class="error">{{ form.TechSupport.errors[0] }}</span>
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    <label for="StreamingTV">{{ form.StreamingTV.label }}</label>
+                    {{ form.StreamingTV(id="StreamingTV") }}
+                    {% if form.StreamingTV.errors %}
+                        <span class="error">{{ form.StreamingTV.errors[0] }}</span>
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    <label for="tenure">{{ form.tenure.label }}</label>
+                    {{ form.tenure(id="tenure") }}
+                    {% if form.tenure.errors %}
+                        <span class="error">{{ form.tenure.errors[0] }}</span>
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    <label for="MonthlyCharges">{{ form.MonthlyCharges.label }}</label>
+                    {{ form.MonthlyCharges(id="MonthlyCharges") }}
+                    {% if form.MonthlyCharges.errors %}
+                        <span class="error">{{ form.MonthlyCharges.errors[0] }}</span>
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    <label for="TotalCharges">{{ form.TotalCharges.label }}</label>
+                    {{ form.TotalCharges(id="TotalCharges") }}
+                    {% if form.TotalCharges.errors %}
+                        <span class="error">{{ form.TotalCharges.errors[0] }}</span>
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    <label for="Contract">{{ form.Contract.label }}</label>
+                    {{ form.Contract(id="Contract") }}
+                    {% if form.Contract.errors %}
+                        <span class="error">{{ form.Contract.errors[0] }}</span>
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    <label for="PaperlessBilling">{{ form.PaperlessBilling.label }}</label>
+                    {{ form.PaperlessBilling(id="PaperlessBilling") }}
+                    {% if form.PaperlessBilling.errors %}
+                        <span class="error">{{ form.PaperlessBilling.errors[0] }}</span>
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    <label for="PaymentMethod">{{ form.PaymentMethod.label }}</label>
+                    {{ form.PaymentMethod(id="PaymentMethod") }}
+                    {% if form.PaymentMethod.errors %}
+                        <span class="error">{{ form.PaymentMethod.errors[0] }}</span>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            {{ form.submit(class_="btn btn-primary") }}
+        </div>
+    </form>
+
+    {% if prediction_result %}
+    <div class="result">
+        <h2>Prediction: {{ prediction_result }}</h2>
+    </div>
+    {% endif %}
+
+    <!-- Bootstrap and Popper.js scripts -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
