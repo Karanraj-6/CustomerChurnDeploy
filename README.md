@@ -37,13 +37,11 @@ Here’s a video demonstration of the Customer Churn Prediction project:
   </a>
 </div>
 
-Replace `YOUR_VIDEO_ID` with the actual ID of your YouTube video.
+## WEBSITE
 
-## Installation
 
-To get started with this project, follow these steps:
-
-1. Clone the repository:
+1. Live Website:
    ```bash
-   git clone https://github.com/yourusername/your-repo.git
+
+   website: https://customerchurndeploy-karanraj-6.onrender.com
  
